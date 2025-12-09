@@ -1,0 +1,55 @@
+name: Auto Update From NPM
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "* * * * *" # 每分钟检查一次
+  workflow_dispatch:
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Get latest version from npm
+        id: npm
+        run: |
+          echo "version=$(npm view see-u-ui version)" >> "$GITHUB_OUTPUT"
+
+      - name: Read local version
+        id: local
+        run: |
+          echo "version=$(node -p "require('./package.json').dependencies?.['see-u-ui'] || require('./package.json').devDependencies?.['see-u-ui'] || ''")" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          if [ "${{ steps.npm.outputs.version }}" = "${{ steps.local.outputs.version#^ }}" ]; then
+            echo "need_update=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "need_update=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install latest version
+        if: steps.compare.outputs.need_update == 'yes'
+        run: |
+          npm install see-u-ui@latest
+
+      - name: Commit & Push Changes
+        if: steps.compare.outputs.need_update == 'yes'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "chore: update see-u-ui to latest version" || true
+          git push
