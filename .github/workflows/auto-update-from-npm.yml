@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "* * * * *" # 每分钟检查一次
+    - cron: "* * * * *"
   workflow_dispatch:
 
 jobs:
@@ -34,7 +34,9 @@ jobs:
       - name: Compare versions
         id: compare
         run: |
-          if [ "${{ steps.npm.outputs.version }}" = "${{ steps.local.outputs.version#^ }}" ]; then
+          local="${{ steps.local.outputs.version }}"
+          local="${local#^}"  # 去掉开头的 ^
+          if [ "${{ steps.npm.outputs.version }}" = "$local" ]; then
             echo "need_update=no" >> "$GITHUB_OUTPUT"
           else
             echo "need_update=yes" >> "$GITHUB_OUTPUT"
