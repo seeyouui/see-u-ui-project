@@ -1,0 +1,13 @@
+import { App } from 'vue';
+import { SeeButton } from './components/see-button/index';
+import { SeeText } from './components/see-text/index';
+import { SeeLink } from './components/see-link/index';
+import { formatCurrency, useCurrencyFormat } from './utils/hooks/useCurrencyFormat';
+import { formatDate, useDateFormat } from './utils/hooks/useDateFormat';
+import { formatTimeAgo, useTimeAgo } from './utils/hooks/useTimeAgo';
+export { formatCurrency, useCurrencyFormat, formatTimeAgo, useDateFormat, formatDate, useTimeAgo };
+export { SeeButton, SeeText, SeeLink };
+declare const _default: {
+    install: (app: App) => void;
+};
+export default _default;
