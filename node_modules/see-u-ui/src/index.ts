@@ -1,4 +1,4 @@
-import type { App, Component } from "vue";
+import type { App, DefineComponent } from "vue";
 
 import { SeeButton } from "./components/see-button/index";
 import { SeeText } from "./components/see-text/index";
@@ -8,11 +8,11 @@ import { formatCurrency, useCurrencyFormat } from "./utils/hooks/useCurrencyForm
 import { formatDate, useDateFormat } from "./utils/hooks/useDateFormat";
 import { formatTimeAgo, useTimeAgo } from "./utils/hooks/useTimeAgo";
 
-const components: Component[] = [
+const components: DefineComponent[] = [
   SeeButton,
   SeeText,
   SeeLink
-];
+]as unknown as DefineComponent[];
 const install = (app: App) => {
   components.forEach((component) => {
     if (component.name) {

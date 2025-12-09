@@ -1,10 +1,10 @@
 {
   "name": "see-u-ui",
-  "version": "1.0.010",
+  "version": "1.0.011",
   "description": "SeeYouUI，是全面兼容nvue的uni-app生态框架",
   "license": "MIT",
   "author": "GmhLovEDM",
-  "type": "module", 
+  "type": "module",
   "files": [
     "src",
     "dist"
