@@ -1,6 +1,6 @@
-# see-u-ui-project
+# SeeYouUI Project
 
-## SeeYouUI 组件库官方文档：http://113.44.242.235:9000/
+## [官方文档：(https://www.seeuui.cn/)](https://seeuui.cn/)
 
 > uniapp（vue3）项目，已引入 SeeYouUI 组件库
 >
