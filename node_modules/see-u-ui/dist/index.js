@@ -142,7 +142,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const SeeButton = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-1e2042bb"]]);
+const SeeButton = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-4971413c"]]);
 const __default__$1 = {
   name: "SeeLink"
 };
@@ -154,7 +154,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     color: { default: "" },
     href: { default: "" },
     isLine: { type: Boolean, default: false },
-    lineColor: { default: "" }
+    lineColor: { default: "" },
+    size: { default: 16 }
   },
   emits: ["onClick"],
   setup(__props, { emit: __emit }) {
@@ -178,6 +179,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       if (props.isLine && props.lineColor) {
         style.borderBottomColor = props.lineColor;
       }
+      style.fontSize = typeof props.size === "number" ? `${props.size}px` : props.size;
       return style;
     });
     const onClick = () => {
@@ -208,7 +210,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeeLink = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-c8187658"]]);
+const SeeLink = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-39aa15b5"]]);
 function normalizeDate$1(date) {
   if (date === null || date === void 0) return null;
   if (date instanceof Date) return date;
@@ -246,17 +248,11 @@ function formatDate(date, fmt = "YYYY-MM-DD HH:mm:ss", options = { placeholder: 
     // 毫秒
   };
   if (/(Y+|y+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (d.getFullYear() + "").substr(4 - RegExp.$1.length)
-    );
+    fmt = fmt.replace(RegExp.$1, (d.getFullYear() + "").substr(4 - RegExp.$1.length));
   }
   if (/(W+)/.test(fmt)) {
     const week = ["日", "一", "二", "三", "四", "五", "六"];
-    fmt = fmt.replace(
-      RegExp.$1,
-      (RegExp.$1.length > 1 ? RegExp.$1.length > 2 ? "星期" : "周" : "") + week[d.getDay()]
-    );
+    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length > 1 ? RegExp.$1.length > 2 ? "星期" : "周" : "") + week[d.getDay()]);
   }
   for (const k in o) {
     if (new RegExp("(" + k + ")").test(fmt)) {
@@ -264,10 +260,7 @@ function formatDate(date, fmt = "YYYY-MM-DD HH:mm:ss", options = { placeholder: 
       if (k === "S+") {
         fmt = fmt.replace(RegExp.$1, ("000" + value).slice(-3));
       } else {
-        fmt = fmt.replace(
-          RegExp.$1,
-          RegExp.$1.length === 1 ? value : ("00" + value).substr(("" + value).length)
-        );
+        fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? value : ("00" + value).substr(("" + value).length));
       }
     }
   }
@@ -388,7 +381,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     href: { default: "" },
     phoneNumber: { default: "" },
     date: { default: "" },
-    dateFormat: { default: "YYYY-MM-DD" }
+    dateFormat: { default: "YYYY-MM-DD" },
+    size: { default: 16 }
   },
   emits: ["onClick"],
   setup(__props, { emit: __emit }) {
@@ -399,7 +393,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const getStyle = computed(() => {
       return {
-        color: props.color
+        color: props.color,
+        fontSize: typeof props.size === "number" ? `${props.size}px` : props.size
       };
     });
     const onClick = () => {
@@ -428,8 +423,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           key: 1,
           text: props.text,
           type: props.type,
-          href: props.href
-        }, null, 8, ["text", "type", "href"])) : createCommentVNode("", true),
+          href: props.href,
+          size: props.size
+        }, null, 8, ["text", "type", "href", "size"])) : createCommentVNode("", true),
         props.mode === "phone" ? (openBlock(), createElementBlock("text", {
           key: 2,
           class: normalizeClass(getClass.value),
@@ -454,7 +450,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeeText = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-677756d4"]]);
+const SeeText = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-97cd08f1"]]);
 const components = [
   SeeButton,
   SeeText,
